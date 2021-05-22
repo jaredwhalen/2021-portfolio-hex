@@ -1,0 +1,49 @@
+<!--removeIf(pymframe)-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jared Whalen</title>
+  <link rel="icon" type="image/png" href="./images/favicon-01.png">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122320008-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-122320008-2');
+  </script>
+
+</head>
+
+<body>
+  <!--endRemoveIf(pymframe)-->
+
+  {% include "partials/stylesheets.html" %}
+
+  <!--build:css styles.min.css-->
+  <link rel="stylesheet" href="css/styles.css">
+  <!--endbuild-->
+
+  {% include "header.html" ignore missing %}
+  <div class="app-wrapper">
+  {% include "main-body.html" ignore missing %}
+  {% include "partials/script-links.html" %}
+  </div>
+  {% include "footer.html" ignore missing %}
+
+
+
+  <!--build:js main.min.js -->
+  <script src="js/main.js"></script>
+  <!-- endbuild -->
+
+  <!--removeIf(pymframe)-->
+</body>
+
+</html>
+<!--endRemoveIf(pymframe)-->

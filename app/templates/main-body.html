@@ -1,0 +1,22 @@
+<section id='portfolio'>
+  <ul class="hex-grid__list">
+      {% for item in data %}
+      <li class="hex-grid__item">
+        <a target='_blank' href='{{item.url}}'>
+            <div class="hex-grid__content">
+              <div class="hex-grid__content-label">
+                <div class=hex-grid__content-label-wrapper">
+                  <div class="g-title">{{item.title}}</div>
+                  <div class="g-tag">{{item.tag}} / {{item.purpose}}</div>
+                  <div class="g-tools">
+                  <em>{{item.tools}}</em>
+                  </div>
+                </div>
+              </div>
+              <div class="hex-grid__content-art" style='background-image: url(./images/{{item.image}})'></div>
+            </div>
+          </a>
+      </li>
+      {% endfor %}
+  </ul>
+</section>

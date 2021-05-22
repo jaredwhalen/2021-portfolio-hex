@@ -1,0 +1,210 @@
+@import './values';
+
+$block: '.hex-grid';
+@mixin grid-item($amount) {
+  @for $i from 1 through $amount {
+    &:nth-of-type(#{$amount}n + #{$i}) {
+      grid-column: #{$i + $i - 1} / span 3;
+      @if $i % 2 == 0 {
+        grid-row: calc(var(--counter) + var(--counter) - 1) / span 2;
+      }
+    }
+  }
+  @for $i from 1 through 20 {
+    &:nth-of-type(n + #{$i * $amount + 1}) {
+      --counter: #{$i + 1};
+    }
+  }
+}
+
+#{$block} {
+  display: flex;
+  justify-content: center;
+
+  &__list {
+    width: 70vw;
+    @include tablet {
+      width: calc(100vw - 15px);
+    }
+    --amount: 5;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(var(--amount), 1fr 2fr) 1fr;
+    grid-gap: 1.5rem 3rem;
+
+
+  }
+
+  &__item {
+    position: relative;
+    grid-column: 1 / span 3;
+    grid-row: calc(var(--counter) + var(--counter)) / span 2;
+    filter: drop-shadow(0 0 1px rgba($accent, 1px)) drop-shadow(0 0 10px rgba(#222, 1));
+    height: 0;
+    padding-bottom: 90%;
+    transition: transform 0.1s;
+    &:hover {
+      transform: scale(1.1);
+      z-index: 10;
+    }
+
+  }
+
+  &__content, &__content-art {
+    pointer-events: all;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    font-size: 1.125rem;
+    color: #111111;
+    background-color: $background;
+    clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 25%;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.24s ease-out;
+  }
+
+  &__content {
+    height: 100%;
+    width: 100%;
+    &:hover {
+      .hex-grid__content-label {
+        transform: scaleY(1);
+      }
+      .hex-grid__content-art {
+        transition: opacity 0.24s ease-out;
+        opacity: 0.25;
+      }
+
+    }
+
+
+  }
+  &__content-art {
+    height: calc(100% - 15px);
+    width: calc(100% - 15px);
+    transition: transform 0.24s ease-out;
+    z-index: 1;
+  }
+  &__content-label {
+    height: calc(80% - 15px);
+    width: calc(80% - 15px);
+    justify-content:center;
+    z-index: 2;
+    position: absolute;
+    padding: 5px 0px;
+    font-weight: 200;
+    font-size: 14px;
+    transform: scaleY(0);
+    transition: transform 0.24s ease-out;
+    display: flex;
+    flex-wrap:wrap;
+    align-items: center;
+    line-height: 1.4;
+
+
+
+
+    .g-title {
+      text-transform: uppercase;
+      color: $accent;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .g-tag {
+      color: $offwhite;
+      font-size: 12px;
+    }
+
+    .g-tools {
+      border-top: 1px solid $offwhite;
+      margin-top: 5px;
+      padding-top: 5px;
+      text-transform:inherit;
+      color: $offwhite;
+      font-size: 12px;
+
+
+    }
+
+    .hex-grid__content-label-wrapper {
+
+    }
+
+
+  }
+
+
+
+}
+@media screen and (min-width: 1440px) {
+  #{$block} {
+    &__list {
+      --amount: 6;
+      --counter: 1;
+    }
+
+    &__item {
+      @include grid-item(6);
+    }
+  }
+}
+@media screen and (min-width: 1120px) and (max-width: 1439px) {
+  #{$block} {
+    &__list {
+      --amount: 4;
+      --counter: 1;
+    }
+
+    &__item {
+      @include grid-item(4);
+    }
+  }
+}
+@media screen and (min-width: 840px) and (max-width: 1119px) {
+  #{$block} {
+    &__list {
+      --amount: 3;
+      --counter: 1;
+      grid-gap: 1.5rem 3rem;
+    }
+
+    &__item {
+      @include grid-item(3);
+    }
+  }
+}
+@media screen and (max-width: 840px) {
+  #{$block} {
+    &__list {
+      --amount: 2;
+      --counter: 1;
+      grid-gap: 1.5rem 3rem;
+    }
+
+    &__item {
+      @include grid-item(2);
+      &:hover {
+        transform: scale(1);
+      }
+    }
+
+    &__content-label {
+      transform: scaleY(1) !important;
+    }
+
+    &__content-art {
+      opacity: 0.25;
+    }
+
+  }
+}

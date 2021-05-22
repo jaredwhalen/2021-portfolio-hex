@@ -1,0 +1,9 @@
+node_modules
+.tmp
+*.log
+.idea
+.DS_Store
+credentials.json
+token.json
+.env
+package-lock.json
